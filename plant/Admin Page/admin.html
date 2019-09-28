@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="../img/tubiao1.jpg" type="image/x-icon">
+    <title>Plant Manage Page</title>
+  <script src="../JS/jquery-1.9.0.min.js" type="text/javascript"></script>
+<script src="bootstrap-4.3.1-dist/js/bootstrap.min.js" type="text/javascript"></script>
+<link href="bootstrap-4.3.1-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <style>
+        html,body{
+            margin: 0;
+            padding: 0;
+        }
+        #box{
+            /* position: absolute; */
+            /* left: 15%; */
+            /* right: 15%; */
+            width: 70%;
+            height: 1300px;
+            /* margin: 0px,10px,0px,50px; */
+			border: 1px solid #606968;
+            margin-left: 200px;
+            margin-right: 200px;
+            background-color：#BFBFBF;
+        }
+        #topbox{
+            height:300px;
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            
+            /* 可能是div的长宽比例和img的长宽比不一样，所以平铺拉伸后有点移位 */
+            background-size: cover;   
+            /* background-repeat:no-repeat; */
+            overflow-y: auto
+        }
+        #mainbox{
+            height: 1000px;
+            background-color:#7BBFEA;
+            padding: 10px;
+        }
+        #photo{
+            height: 300px;
+            /* background-color: blanchedalmond; */
+            /* flex: 30%; */
+            /* margin: 5px; */
+            /* border: 5px; */
+            padding: 10px;
+            box-sizing: border-box;
+        }       
+        img{
+            width: 100%;
+            height: 100%;
+            width: 250px;
+
+        }
+    </style>
+    <script>
+//          function one(){
+//			  alert("click");
+//		  }
+//          	btn.onclick(function(){
+//				var btn = document.getElementById("btn1");
+//	            alert("click");
+//		});
+//        // 删除植物的详细信息
+//          $(document).ready(function(){
+//			  alert("ready");
+//			  
+//			  $("#btn1").click(function(){
+//				  alert("click");
+////				$.ajax({
+////            url:"../PHP/delPlant.php",
+////            type:"POST",
+////            data:{
+////                plant:$('#xxxx').val()
+////            },
+////            dataType:"json",
+////            success:function(data){
+////                   alert("down");
+////            },
+////			error:function(state){
+////				 alert("error");
+////			}
+////			
+////			});
+////            
+//			  
+//		  });
+//		  });
+//			
+            
+        
+            
+    </script>
+</head>
+<body>
+   <div style="text-align: center ;border-bottom: 5px  inset #606968 ">
+   	
+    <h1>Welcome to manager page！</h1>   
+    
+   </div>   
+   
+   <img  src="#" alt="">
+    <div id="box">
+       <center>
+        <div style=" width:98%; height:auto; padding: 10px; background-color:gainsboro;">
+        <h2 style="text-align:center; ">Add plant information</h2>
+        </div>
+        </center>
+        <hr>
+        <div id="topbox">  
+            <!-- <div id="photo">
+                <img id="img1" src="../img/tubiao1.jpg" alt="">
+            </div> -->
+        </div>
+        <hr>
+        <div id="mainbox">
+            <br>
+            <form action="../PHP/addPic.php" method="post" enctype="multipart/form-data">
+                <input class="btn btn-default" type="button" value="Choose plant images" onclick="$('#file1').click();" />
+	            <input name="savepath" style="display: none;" id="file001" />
+                <input type="file" id="file1" name = "file" style="display: none;" multiple/>
+                <br><br>             
+                <input name="plantName" type="text" class="form-control" style="width:300px" placeholder="Enter Plant Name:">
+                <br>            
+                <select name="category" class="form-control" style="width:150px">
+                    <option>herbaceous Plant</option>
+                    <option>Flowers and herbs</option>
+                    <option>Edible herbs</option>
+                    <option>Medicinal herbs</option>
+                    <option>Ground cover herbs</option>
+                    <option>Vine Plant</option>
+                    <option>vines flowers</option>
+                    <option>Leaf-viewing plant</option>
+                    <option>Hanging plant </option>
+                </select>              
+                <h3>Enter Describe</h3>
+                <textarea name="introduction" id="" style="width:100%;height:150px;resize: none;"></textarea>
+                <br>
+                <h3>Enter Maintenan Method</h3>
+                <textarea name="care" id="" style="width:100%;height:150px;resize: none;"></textarea>
+                <br>
+                <input style="border: 1px solid black" class="btn btn-default" type="submit" value="submit" >
+            </form>
+            <hr>
+            <h2 style="text-align:center">Delete</h2>
+            <hr>
+               <form action="../PHP/delPlant.php" method="post">            
+                <input type="text" id="plant" name="plant" class="form-control" style="width:300px" placeholder="Enter Similar Name for Delete">
+                <br>
+                <div>
+    <button type="button" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">Select plant
+    </button>
+<select class="form-control" id="select" name="select">
+			<option></option>
+			
+		</select>
+
+</div>
+
+                <input style="margin-top: 50px;border: 1px solid black" class="btn btn-default" id="btn1" name="btn1"  type="submit"  value="Delete"/>
+                 <!-- onclick="console.log($('#xxxx')) -->
+                 
+                 </form>
+
+           
+        </div>
+    </div>
+</body>
+<script>
+	    $(document).ready(function(){
+		$("#plant").bind("input change",function(){
+			$search = $("#plant").val();
+			$.post(
+				"../PHP/Search.php",
+			{
+			search : $search
+			
+			},
+			function(data,status){
+//				alert(status);
+				
+				if(status === 'success')
+					{ 
+					 var index = data.length;
+//						alert(index);
+					 var count = index;
+					 $("#select").html("");
+					  while(index>0){
+					     var pname = data[index-1].pname;
+						$("#select").append("<option>"+pname+"</option>");
+						  
+					    index=index-1;
+					  }
+					}
+			},
+				"json"
+			
+			);
+		});
+			
+			 
+		 
+			
+		});
+	
+        $("#file1").change(function(){
+            $('#file001').val($("#file1").val());
+            // console.log(this.files.length)
+            // var number = this.files.length;
+            console.log(this.files.length)
+            // let list = Array.from(this.files);   
+            console.log(this.files) 
+            console.log(this.files[0].name)
+            // console.log(list)
+            var filelength = this.files.length;
+            console.log(filelength);
+            for(i=0;i<filelength;i++){
+                // <div id="photo1">
+                // <img id="img1" src="../img/tubiao1.jpg" alt="">
+                // </div>
+                var divE = document.createElement('div');
+                var divId = document.createAttribute('id');
+                var divClass = document.createAttribute('class')
+                divClass.value = 'col-lg-4'
+                divId.value = 'photo'
+                divE.setAttributeNode(divClass)
+                divE.setAttributeNode(divId);
+                document.getElementById("topbox").appendChild(divE);
+
+                var imgE = document.createElement('img');
+                var imgid = document.createAttribute('id');
+                var imgSrc = document.createAttribute('src');
+                imgid.value = 'img'+(i+1);
+                imgSrc.value = "";
+                imgE.setAttributeNode(imgid);
+                imgE.setAttributeNode(imgSrc);
+                divE.appendChild(imgE);
+
+                var dataURL = getObjectURL(this.files[i]);
+                $('#img'+(i+1)).attr("src",dataURL)
+//				alert(dataURL);
+            }
+            
+            // var dataURL1 = getObjectURL(this.files[0]);
+            // $('#img1').attr("src",dataURL1);
+        })
+        // $("#file2").change(function(){
+        //     $('#file002').val($("#file2").val());
+        //     var dataURL = getObjectURL(this.files[]);
+        //     $('#img2').attr("src",dataURL);
+        // })
+        function getObjectURL(file) {
+            var url = null ; 
+            // 下面函数执行的效果是一样的，只是需要针对不同的浏览器执行不同的 js 函数而已
+            if (window.createObjectURL!=undefined) { // basic
+                url = window.createObjectURL(file) ;
+            } else if (window.URL!=undefined) { // mozilla(firefox)
+                url = window.URL.createObjectURL(file) ;
+            } else if (window.webkitURL!=undefined) { // webkit or chrome
+                url = window.webkitURL.createObjectURL(file) ;
+            }
+            return url ;
+        }
+              
+    </script>
+</html>

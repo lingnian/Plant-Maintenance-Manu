@@ -1,0 +1,50 @@
+.cell{
+   
+    padding: 20px;
+    display: inline-block;
+    vertical-align: middle;
+
+    
+    
+}
+.ui-block-a,.ui-block-b,.ui-block-c,.ui-block-d{
+    float:left;
+} 
+span{
+    /*自动换行*/
+     word-break: break-all; 
+     white-space: normal;
+}
+.detail{
+    
+    /*border: 1px solid #DADFDD;*/
+    min-height: 350px;
+    
+}
+.one{
+	font-weight: bold;
+	font-size: 20px;
+	text-align:center;
+}
+#ImgContent{
+	margin: 0 auto;
+	background-color: #9BC9D7 ; 
+	
+}
+#ImgContent img{
+	
+	padding: 20px;
+	border: 1px solid #F1E9E9;
+	height: 200px;
+	width: 20%;
+	float: left;
+}
+@media screen and (max-width:500px)
+{
+    .cell{
+        position: relative;
+        
+    }
+    
+}
+

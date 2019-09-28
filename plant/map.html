@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Plant</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <link href="Scripts/jquery.mobile-1.4.5.min.css" rel="stylesheet" type="text/css"/>
+        <link href="CSS/style.css" rel="stylesheet" type="text/css"/>
+       
+        <script src="JS/jquery-1.9.0.min.js" type="text/javascript"></script> 
+
+        <script src="Scripts/jquery.mobile-1.4.5.min.js" type="text/javascript"></script>
+        
+    </head>
+    <body>
+        <div data-role="page" style="background-color:rgba(199,255,236,0.4)">
+           <script>
+			$(document).ready(function(){
+	
+  $(".tag").click(function(){
+	  //关于 this 与 $(this)  第一个是js对象 ，第二个明显是jQuery对象，在jQuery中使用this时，需要先将this转换成jQuery对象，才能调用jQuery中的text（） ！
+	  var text = $(this).text();
+	  $("#mapcontent").html("");
+//	  alert(text);
+	  $("#mapname").text(text+":");
+	  $.post(
+	   "PHP/map.php",
+		  {
+			tag : text  
+		  },
+		  function(data){
+			  var length = data.length;
+			  while(length>0)
+				  {
+					  //循环输出
+//					  alert(data[length-1].pname);
+					  $("#mapcontent").append("<a id = '"+data[length-1].pname+"'href='detail.html' class='detail ui-btn ui-btn-a ui-btn-corner-all ui-shadow ui-btn-inline'><img src='"+data[length-1].pimg+"' alt='' width='200' height='300' style='  padding:20px'></a>");
+					  
+					  
+					  length = length-1;
+				  }
+		  },
+		  "json"
+	  );
+	  
+  });
+    //Click
+	$(document).on("click", ".detail", function () {
+
+                var id = this.id;
+		        localStorage.setItem("name",id);
+//		 alert(localStorage.getItem("name"));
+                
+
+ });
+	
+	//添加鼠标移入与点击事件
+	$(document).on("mouseover",".detail",function(){
+		var $this = $(this).children("img");
+		 $this.css("border","2px solid black");
+		$this.css("opacity","0.5");
+		
+	});
+	$(document).on("mouseout",".detail",function(){
+		var $this1 = $(this).children("img")
+		  $this1.css("border","0px solid black");
+		$this1.css("opacity","1.0");
+	});
+			
+	
+});
+			</script>
+            <div data-role="header" data-theme="a" data-position="fixed" data-inset="ture">
+                <div data-role="navbar">
+                    <ul style="border: 1px solid black">
+                        
+                        <li style="border: 1px solid black"><a href="index.html"  data-icon="home" class="ui-alt-icon ui-nodisc-icon" rel = "external">Home</a></li>
+                        <li style="border: 1px solid black"><a href="#" data-icon="grid" class=" ui-btn-active ui-state-persist ui-alt-icon ui-nodisc-icon">Plant Map</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+            <div data-role="content" class="ui-content">
+              <div data-role="listview" data-inset="true" style="position: relative; background-color: #779EB9"  >
+              	<center>
+              	<div class="one i-btn ui-btn-b ui-btn-inline"  >herbaceous Plant</div>
+              
+              	<div data-role="button" class="tag ui-btn ui-btn-b ui-btn-inline ui-btn-corner-all">Flowers and herbs</div>
+              	<div data-role="button" class="tag ui-btn-inline ui-btn ui-btn-corner-all">Edible herbs</div>
+              	<div data-role="button" class="tag ui-btn ui-btn-b ui-btn-inline ui-btn-corner-all">Medicinal herbs</div>
+              	<div data-role="button" class="tag ui-btn-inline ui-btn ui-btn-corner-all">Ground cover herbs </div>
+              	
+              	</center>
+              	
+              </div>
+     
+              <div data-role="listview" data-inset="true" style="position: relative; background-color: #779EB9 ;text-align: center;"   >
+              
+              	<div class="one i-btn ui-btn-b ui-btn-inline" style="" >Vine Plant</div>              	
+              	<div data-role="button" class="tag ui-btn ui-btn-b ui-btn-inline ui-btn-corner-all">Biennial vines</div>
+              	<div data-role="button" class="tag ui-btn-inline ui-btn ui-btn-corner-all">Perennial vines</div>
+              	<div data-role="button" class="tag ui-btn ui-btn-b ui-btn-inline ui-btn-corner-all">vines flowers</div>
+              	
+              	
+              </div>
+          
+               <div data-role="listview" data-inset="true" style="background-color: #779EB9 ;text-align: center;"  >
+              
+              	<div class="one i-btn ui-btn-b ui-btn-inline" style="" >Tropical plants</div>     
+              	<div data-role="button" class="tag ui-btn ui-btn-b ui-btn-inline ui-btn-corner-all">Fruit-viewing plant</div>
+              	<div data-role="button" class="tag ui-btn-inline ui-btn ui-btn-corner-all">Leaf-viewing plant</div>
+              	<div data-role="button" class="tag ui-btn ui-btn-b ui-btn-inline ui-btn-corner-all">Hanging plant </div>
+              	<div data-role="button" class="tag ui-btn-inline ui-btn ui-btn-corner-all">Palm plant</div>
+              	
+              	
+              	
+              </div>
+              <div class="ui-content">
+              <center>
+              <h2 id="mapname"></h2>
+              </center>	
+              <div data-role="content" data-inset="true" id="mapcontent" style="text-align: center">
+               
+             
+                 
+                
+              </div>
+              
+              </div>
+        
+
+            </div>
+            <div data-role="footer" data-theme="b" data-position="fixed">
+                <center> @CopyRight +86 10010001121 Contact Us </center>
+            </div>
+            
+        </div>
+    </body>
+</html>

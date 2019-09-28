@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+        <style type="text/css">
+        
+            body{
+                text-align:center;
+                background-color: #F2FFE6;      
+            }
+            .login{
+                border: 2px solid black;
+               
+                height: 200px;
+                width: 50%;
+                background-color: beige;
+                 min-width: 500px;
+                /*居中*/
+                 margin:0 auto;
+                margin-top: 50px;
+            }
+            .inputtxt{
+                outline:none; 
+                box-shadow:0 0 1px 1px #9ec0f7;
+                border-radius: 10px;
+                border: 2px solid black;
+                
+                
+            }
+            span{
+				font-size: 20px;
+               font-style:inherit;
+               color: grey;
+               
+            }
+            .div1{
+                
+                position: relative;
+                margin: 20px;
+                /*margin-left: 30%;*/
+                
+            }
+            
+        </style>
+        <script type="text/javascript">
+//		      alert("Welcome ! Adminstor");
+			
+			function click1(){
+//			 alert("ok");
+		    var id = document.getElementById('name').value;
+			var pass = document.getElementById('pass').value;
+			var btn = document.getElementById('submit');
+			 if(id =="zero" && pass == "qwer"){
+				  alert("Welcome to Manage page!");
+				  window.open("Admin page/admin.html");
+				 
+			 }else{
+				 alert("Count or password error，try again.")
+			 }
+			};
+			
+		  
+		</script>
+    </head>
+    <body> 
+        <div style="margin:0 auto; text-align: center;font-size: 20px; ">
+            <image src="Images/Book.png" width="60px" />
+            <a style="color: black; text-decoration:none; font-size: 20px " href="index.html">Plant Manage</a>
+        </div>
+        <div class="login">
+          
+            <div class="div1">
+                <image style="width:50px; float: left;" src="Images/hi.png"/>
+                <span>Admin Account    </span>
+                <input style="margin-left:8px" class="inputtxt" id="name" type="text"/>
+                
+            </div>
+            <div class="div1">
+                <span>Admin Password  </span>
+                <input  class="inputtxt" type="password" id="pass" >
+                
+            </div>
+             <div class="div1" >
+                
+             <button style="width: 90px;height: 30px;margin-top: 40px;" class="inputtxt"  id="submit" onClick="click1()">Login</button>
+                 
+<!--
+                      <a role ="button"
+                       style=" float: left;color: red; text-decoration:none; font-size: 14px"href="register.html">Go to Register</a>
+               
+                       <a role ="button"
+                          style="float: right;color: blueviolet; text-decoration:none; font-size: 14px"href="getBack.php">Forget the password?</a>
+-->
+               
+                
+              
+            </div >
+                
+
+        </div>
+        
+    </body>
+</html>
+
